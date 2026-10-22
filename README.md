@@ -4,25 +4,27 @@
 [![LootDrop — Каталог игровых товаров и оформление заказов.](docs/portfolio/card.png)](docs/portfolio/card.svg)
 <!-- portfolio-card:end -->
 
-A Telegram storefront prototype: game catalog, checkout previews, order history
-and domain rules for payments and manual fulfillment. Python 3.12, aiogram,
-SQLite and typed service boundaries.
+Показать путь покупателя от игрового товара до оформленного заказа. LootDrop содержит каталог, предварительный экран оплаты и историю заказов в Telegram. Это прототип витрины на Python 3.12, aiogram и SQLite.
 
-The default mock provider makes no payment requests, returns no usable wallet
-address and never confirms or settles payments. Docker Compose pins mock mode.
+## Что можно оценить в демо
 
-## Run
+Покупатель выбирает товар и проходит оформление заказа. В коде правила заказа и платежа отделены от Telegram-экранов и хранения данных: `app/domain` содержит правила, `app/services` связывает шаги сценария, `app/db` работает с SQLite. Такая структура позволяет отдельно разбирать поведение заказа и интерфейс бота.
 
-Copy `.env.example` to `.env`, set a dedicated demo `BOT_TOKEN`, then run:
+**Статус:** демонстрация каталога и оформления. Mock-провайдер не запрашивает оплату, не выдаёт рабочий адрес кошелька и не подтверждает платежи. Compose фиксирует этот режим. Фоновый воркер пока является заготовкой, а расчёты и ручная выдача ещё не связаны в полный рабочий сценарий.
+
+Обсудить похожий проект: [sh3l.beer](https://sh3l.beer).
+
+## Запуск
+
+Скопируйте `.env.example` в `.env`, задайте отдельный демонстрационный `BOT_TOKEN` и запустите:
 
 ```sh
 docker compose up --build -d
 ```
 
-The bot creates its SQLite schema and sample catalog at startup. No real user
-database, original brand assets or secrets are included.
+При старте бот создаёт SQLite-схему и пример каталога. Репозиторий не содержит реальной пользовательской базы, исходных брендовых материалов и секретов.
 
-## Development
+## Разработка и проверки
 
 ```sh
 python -m pip install -e . pytest pytest-asyncio ruff
@@ -30,16 +32,10 @@ python -m pytest
 ruff check app tests
 ```
 
-`app/domain` holds order/payment policies; `app/services` orchestrates them;
-`app/db` contains SQLite storage; `app/handlers` renders Telegram screens.
-The CryptAPI adapter remains available in source behind the existing provider
-protocol; it is not used in the demo.
+Telegram-экраны находятся в `app/handlers`. Адаптер CryptAPI сохранён в исходниках за общим протоколом провайдера; деморежим его не использует.
 
-## Prototype boundaries
+## Границы прототипа
 
-The background worker is a placeholder and is not started by Compose. Settlement,
-manual fulfillment and several payment callbacks are not yet wired end to end.
-The demo shows catalog and invoice previews, not a production checkout.
-Real-provider operation and live Telegram acceptance have not been verified.
+Compose не запускает фоновый воркер. Расчёты, ручная выдача товара и часть платёжных callback ещё не связаны в сквозной сценарий. Демо подходит для просмотра каталога и предварительного счёта. Работа реального провайдера и приёмка в Telegram не проверены.
 
-MIT licensed. Maintained by sh3lby.code.
+Лицензия MIT. Автор: sh3lby.code.
