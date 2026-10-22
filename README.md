@@ -1,7 +1,7 @@
 # LootDrop
 
 <!-- portfolio-card:start -->
-[![LootDrop — Каталог игровых товаров и оформление заказов.](docs/portfolio/card.png)](docs/portfolio/card.svg)
+[![sh3lby.code — нейтральная обложка](docs/portfolio/card.png)](docs/portfolio/card.svg)
 <!-- portfolio-card:end -->
 
 A Telegram storefront prototype: game catalog, checkout previews, order history
