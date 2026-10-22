@@ -1,5 +1,9 @@
 # LootDrop
 
+<!-- portfolio-card:start -->
+[![LootDrop — Каталог игровых товаров и оформление заказов.](docs/portfolio/card.png)](docs/portfolio/card.svg)
+<!-- portfolio-card:end -->
+
 A Telegram storefront prototype: game catalog, checkout previews, order history
 and domain rules for payments and manual fulfillment. Python 3.12, aiogram,
 SQLite and typed service boundaries.
