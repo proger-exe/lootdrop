@@ -1,0 +1,13 @@
+services:
+  bot:
+    build: .
+    command: python -m app.bot
+    env_file: .env
+    environment:
+      PAYMENTS_PROVIDER: mock
+    volumes:
+      - sqlite_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  sqlite_data:

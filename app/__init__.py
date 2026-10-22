@@ -1,0 +1,1 @@
+"""LootDrop application package."""
